@@ -1,6 +1,8 @@
 import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
 import BenefitsSection from "@/components/BenefitsSection";
+import QuizSection from "@/components/QuizSection";
+import EarningsSimulator from "@/components/EarningsSimulator";
 import VoceNoComando from "@/components/VoceNoComando";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import HowItWorks from "@/components/HowItWorks";
@@ -18,6 +20,8 @@ const Index = () => (
     <main>
       <HeroSection />
       <BenefitsSection />
+      <QuizSection />
+      <EarningsSimulator />
       <VoceNoComando />
       <HowItWorks />
       <TestimonialsSection />
