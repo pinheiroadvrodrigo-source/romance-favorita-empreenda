@@ -4,6 +4,7 @@ import BenefitsSection from "@/components/BenefitsSection";
 import QuizSection from "@/components/QuizSection";
 import EarningsSimulator from "@/components/EarningsSimulator";
 import VoceNoComando from "@/components/VoceNoComando";
+import bannerBrasileira from "@/assets/banner-brasileira.png";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import HowItWorks from "@/components/HowItWorks";
 import RegistrationForm from "@/components/RegistrationForm";
