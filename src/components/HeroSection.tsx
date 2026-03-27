@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import bannerBrasileira from "@/assets/banner-brasileira.png";
 import bannerEmpreender from "@/assets/banner-empreender.png";
 
 const WHATSAPP_NUMBER = "5591991198584";
