@@ -4,6 +4,7 @@ import BenefitsSection from "@/components/BenefitsSection";
 import QuizSection from "@/components/QuizSection";
 import EarningsSimulator from "@/components/EarningsSimulator";
 import VoceNoComando from "@/components/VoceNoComando";
+import bannerBrasileira from "@/assets/banner-brasileira.png";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import HowItWorks from "@/components/HowItWorks";
 import RegistrationForm from "@/components/RegistrationForm";
@@ -25,6 +26,14 @@ const Index = () => (
       <VoceNoComando />
       <HowItWorks />
       <TestimonialsSection />
+      <div className="w-full">
+        <img
+          src={bannerBrasileira}
+          alt="Brasileirinha - A lingerie da mulher brasileira Romance"
+          className="w-full h-auto object-cover"
+          loading="lazy"
+        />
+      </div>
       <RegistrationForm />
       <BlogSection />
       <FAQSection />

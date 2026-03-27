@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import bannerBrasileira from "@/assets/banner-brasileira.png";
 import bannerEmpreender from "@/assets/banner-empreender.png";
 
 const WHATSAPP_NUMBER = "5591991198584";
@@ -87,15 +86,6 @@ const HeroSection = () => {
         </div>
       </div>
 
-      {/* Second Banner */}
-      <div className="w-full">
-        <img
-          src={bannerBrasileira}
-          alt="Brasileirinha - A lingerie da mulher brasileira Romance"
-          className="w-full h-auto object-cover"
-          loading="lazy"
-        />
-      </div>
     </section>
   );
 };
