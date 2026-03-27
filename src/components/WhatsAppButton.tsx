@@ -6,14 +6,13 @@ const WhatsAppButton = () => {
       href={url}
       target="_blank"
       rel="noopener noreferrer"
-      className="fixed bottom-6 right-6 z-50 flex items-center gap-2 bg-[#25D366] px-5 py-3 rounded-xl shadow-[0_6px_20px_rgba(37,211,102,0.4)] hover:shadow-[0_8px_28px_rgba(37,211,102,0.55)] hover:scale-105 transition-all duration-300"
+      className="fixed bottom-6 right-6 z-50 flex items-center justify-center w-16 h-16 rounded-full bg-[#25D366] shadow-[0_6px_20px_rgba(37,211,102,0.4)] hover:shadow-[0_8px_28px_rgba(37,211,102,0.55)] hover:scale-110 transition-all duration-300 animate-whatsapp-pulse"
       aria-label="Falar no WhatsApp"
     >
-      {/* Official WhatsApp SVG icon with 3D feel */}
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 175.216 175.552"
-        className="w-8 h-8 drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)]"
+        className="w-9 h-9 drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)]"
       >
         <defs>
           <linearGradient id="wa3d" x1="50%" y1="0%" x2="50%" y2="100%">
@@ -30,7 +29,6 @@ const WhatsAppButton = () => {
           d="M66.254 53.89c-1.58-3.52-3.24-3.59-4.75-3.65-1.23-.05-2.63-.05-4.03-.05a7.74 7.74 0 0 0-5.6 2.63c-1.93 2.1-7.36 7.19-7.36 17.53s7.53 20.33 8.58 21.74 14.55 23.28 35.9 31.7c17.76 6.99 21.37 5.6 25.22 5.25 3.84-.35 12.4-5.07 14.15-9.97 1.76-4.9 1.76-9.1 1.23-9.97-.53-.88-1.93-1.4-4.03-2.46s-12.4-6.12-14.33-6.82-3.33-1.05-4.73 1.05-5.43 6.82-6.66 8.23-2.46 1.58-4.56.53-8.88-3.27-16.92-10.43a63.4 63.4 0 0 1-11.71-14.57c-1.23-2.1-.13-3.24.92-4.29.95-.94 2.1-2.46 3.16-3.68a14.4 14.4 0 0 0 2.1-3.51 3.88 3.88 0 0 0-.18-3.68c-.52-1.06-4.63-11.47-6.4-15.68Z"
         />
       </svg>
-      <span className="text-white font-bold text-sm hidden sm:inline">WhatsApp</span>
     </a>
   );
 };
