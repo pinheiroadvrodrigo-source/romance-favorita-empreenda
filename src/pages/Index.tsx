@@ -26,6 +26,14 @@ const Index = () => (
       <VoceNoComando />
       <HowItWorks />
       <TestimonialsSection />
+      <div className="w-full">
+        <img
+          src={bannerBrasileira}
+          alt="Brasileirinha - A lingerie da mulher brasileira Romance"
+          className="w-full h-auto object-cover"
+          loading="lazy"
+        />
+      </div>
       <RegistrationForm />
       <BlogSection />
       <FAQSection />
