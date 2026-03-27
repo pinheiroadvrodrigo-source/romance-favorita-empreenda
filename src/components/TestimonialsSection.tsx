@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import testimonial1 from "@/assets/testimonial-1.png";
-import testimonial2 from "@/assets/testimonial-2.png";
+import testimonialIvaneide from "@/assets/testimonial-ivaneide.jpg";
 import product1 from "@/assets/product-1.png";
 
 const testimonials = [
@@ -14,7 +14,7 @@ const testimonials = [
     name: "Ivaneide Patrício",
     location: "Manaus/AM",
     text: "Eu gosto muito de revender todos os produtos Favorita e a Romance, porque são maravilhosos de excelente qualidade!",
-    img: testimonial2,
+    img: testimonialIvaneide,
   },
   {
     name: "Milena Cauduro Lovato",
@@ -51,6 +51,9 @@ const TestimonialsSection = () => (
             <img
               src={t.img}
               alt={t.name}
+              loading="lazy"
+              width={80}
+              height={80}
               className="w-20 h-20 rounded-full object-cover mx-auto mb-4 border-4 border-primary/20"
             />
             <p className="text-muted-foreground italic mb-4">"{t.text}"</p>
