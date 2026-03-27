@@ -2,7 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { toast } from "sonner";
 
-const WHATSAPP_NUMBER = "5500000000000";
+const WHATSAPP_NUMBER = "5591991198584";
 
 const RegistrationForm = () => {
   const [form, setForm] = useState({
