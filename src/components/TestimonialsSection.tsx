@@ -5,8 +5,8 @@ import product1 from "@/assets/product-1.png";
 
 const testimonials = [
   {
-    name: "Izidoria Pinheiro Abreu",
-    location: "São Luís/MA",
+    name: "Isidoria Pereira Abreu",
+    location: "Belém/PA",
     text: "Eu amo trabalhar com as marcas Romance e Favorita! O que me deixa mais feliz é ver minhas clientes felizes e realizadas.",
     img: testimonial1,
   },
