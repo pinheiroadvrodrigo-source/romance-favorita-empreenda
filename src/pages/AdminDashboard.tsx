@@ -230,35 +230,7 @@ const AdminDashboard = () => {
 
         {/* Registrations Tab */}
         {tab === "registrations" && (
-          <div>
-            <h2 className="text-xl font-bold mb-4">Cadastros</h2>
-            <div className="bg-card rounded-xl shadow-sm overflow-x-auto">
-              {registrations.length === 0 ? (
-                <p className="p-6 text-center text-muted-foreground">Nenhum cadastro.</p>
-              ) : (
-                <table className="w-full text-sm">
-                  <thead>
-                    <tr className="border-b border-border text-left">
-                      <th className="p-4 font-medium">Nome</th>
-                      <th className="p-4 font-medium">CPF</th>
-                      <th className="p-4 font-medium">Data Nasc.</th>
-                      <th className="p-4 font-medium">Data Cadastro</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {registrations.map((r: any) => (
-                      <tr key={r.id} className="border-b border-border">
-                        <td className="p-4">{r.nome}</td>
-                        <td className="p-4">{r.cpf}</td>
-                        <td className="p-4">{new Date(r.data_nascimento).toLocaleDateString("pt-BR")}</td>
-                        <td className="p-4">{new Date(r.created_at).toLocaleDateString("pt-BR")}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              )}
-            </div>
-          </div>
+          <RegistrationsTab registrations={registrations} />
         )}
 
         {/* Analytics Tab */}
