@@ -2,7 +2,7 @@ import { useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { toast } from "sonner";
 
-const WHATSAPP_NUMBER = "5591991198584";
+import { WHATSAPP_URL } from "@/lib/whatsapp";
 
 const questions = [
   {
