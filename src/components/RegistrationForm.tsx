@@ -25,7 +25,7 @@ const RegistrationForm = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!form.nome.trim() || !form.cpf.trim() || !form.data_nascimento) {
-      toast.error("Preencha todos os campos!");
+      toast.error("Preencha todos os campos obrigatórios!");
       return;
     }
     setLoading(true);
