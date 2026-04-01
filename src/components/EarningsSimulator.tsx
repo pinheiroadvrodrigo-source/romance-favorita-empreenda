@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 
-const WHATSAPP_NUMBER = "5591991198584";
+import { WHATSAPP_URL } from "@/lib/whatsapp";
 
 const examples = [
   { vendas: 1000, lucro30: 300, lucro40: 400 },
