@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 
-const WHATSAPP_NUMBER = "5591991198584";
+import { WHATSAPP_URL } from "@/lib/whatsapp";
 
 const examples = [
   { vendas: 1000, lucro30: 300, lucro40: 400 },
@@ -61,11 +61,7 @@ const EarningsSimulator = () => {
   const isValid = vendas >= 230;
 
   const handleCTA = () => {
-    const msg = `Olá, fiz a simulação e quero começar como empreendedora!\nVendas estimadas: ${formatCurrency(vendas)}\nLucro potencial: ${formatCurrency(lucro30)} a ${formatCurrency(lucro40)}`;
-    window.open(
-      `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`,
-      "_blank"
-    );
+    window.open(WHATSAPP_URL, "_blank");
   };
 
   return (

@@ -2,7 +2,7 @@ import { useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { toast } from "sonner";
 
-const WHATSAPP_NUMBER = "5591991198584";
+import { WHATSAPP_URL } from "@/lib/whatsapp";
 
 const questions = [
   {
@@ -90,12 +90,10 @@ const QuizSection = () => {
       return;
     }
     setLoading(true);
-    const msg = `Olá, acabei de fazer o quiz e quero começar como empreendedora!\n\nNome: ${form.nome}\nWhatsApp: ${form.whatsapp}\nEmail: ${form.email}\nPerfil: ${profile}\nPotencial: ${result.range}`;
-    const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
     setTimeout(() => {
       setLoading(false);
       toast.success("Dados enviados! Redirecionando para o WhatsApp...");
-      window.open(url, "_blank");
+      window.open(WHATSAPP_URL, "_blank");
     }, 800);
   };
 

@@ -1,5 +1,7 @@
 import { motion } from "framer-motion";
-import { BookOpen } from "lucide-react";
+import { BookOpen, MessageCircle } from "lucide-react";
+import { Link } from "react-router-dom";
+import { WHATSAPP_URL } from "@/lib/whatsapp";
 
 const posts = [
   {
@@ -47,7 +49,7 @@ const BlogSection = () => (
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: i * 0.1 }}
-            className="bg-card rounded-xl p-6 shadow-sm hover:shadow-lg transition-shadow cursor-pointer group"
+            className="bg-card rounded-xl p-6 shadow-sm hover:shadow-lg transition-shadow group"
           >
             <span className="inline-block text-xs font-semibold text-primary bg-primary/10 px-3 py-1 rounded-full mb-3">
               {p.tag}
@@ -55,9 +57,26 @@ const BlogSection = () => (
             <h3 className="font-bold text-lg mb-2 group-hover:text-primary transition-colors flex items-center gap-2">
               <BookOpen className="w-5 h-5" /> {p.title}
             </h3>
-            <p className="text-muted-foreground text-sm">{p.excerpt}</p>
+            <p className="text-muted-foreground text-sm mb-4">{p.excerpt}</p>
+            <a
+              href={WHATSAPP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1 text-sm font-semibold text-[#25D366] hover:underline"
+            >
+              <MessageCircle className="w-4 h-4" /> Fale Conosco
+            </a>
           </motion.article>
         ))}
+      </div>
+
+      <div className="text-center mt-8">
+        <Link
+          to="/blog"
+          className="inline-block bg-primary text-primary-foreground px-6 py-3 rounded-lg font-bold text-sm hover:opacity-90 transition-opacity"
+        >
+          Ver todos os artigos →
+        </Link>
       </div>
     </div>
   </section>

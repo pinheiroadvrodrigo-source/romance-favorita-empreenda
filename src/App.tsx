@@ -5,6 +5,11 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import Index from "./pages/Index.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import { Revendedora, RendaExtra, TrabalharDeCasa } from "./pages/LandingPages.tsx";
+import BlogPage from "./pages/BlogPage.tsx";
+import BlogPostPage from "./pages/BlogPostPage.tsx";
+import AdminLogin from "./pages/AdminLogin.tsx";
+import AdminDashboard from "./pages/AdminDashboard.tsx";
+import AdminPostEditor from "./pages/AdminPostEditor.tsx";
 
 const queryClient = new QueryClient();
 
@@ -18,6 +23,11 @@ const App = () => (
           <Route path="/revendedora" element={<Revendedora />} />
           <Route path="/renda-extra" element={<RendaExtra />} />
           <Route path="/trabalhar-de-casa" element={<TrabalharDeCasa />} />
+          <Route path="/blog" element={<BlogPage />} />
+          <Route path="/blog/:slug" element={<BlogPostPage />} />
+          <Route path="/admin/login" element={<AdminLogin />} />
+          <Route path="/admin" element={<AdminDashboard />} />
+          <Route path="/admin/posts/:id" element={<AdminPostEditor />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
