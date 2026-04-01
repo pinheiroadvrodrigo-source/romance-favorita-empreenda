@@ -1,16 +1,10 @@
 import { motion } from "framer-motion";
 import bannerEmpreender from "@/assets/banner-empreender.png";
-
-const WHATSAPP_NUMBER = "5591991198584";
+import { WHATSAPP_URL } from "@/lib/whatsapp";
 
 const HeroSection = () => {
-  const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
-    "Olá, quero saber mais sobre como me tornar uma empreendedora!"
-  )}`;
-
   return (
     <section id="home" className="relative overflow-hidden">
-      {/* Hero Content */}
       <div className="bg-secondary">
         <div className="container-narrow px-4 py-16 md:py-24 text-center">
           <motion.h1
@@ -45,7 +39,7 @@ const HeroSection = () => {
               QUERO SER EMPREENDEDORA
             </a>
             <a
-              href={whatsappUrl}
+              href={WHATSAPP_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="border-2 border-primary text-primary-foreground px-8 py-4 rounded-lg text-base font-bold tracking-wide hover:bg-primary/20 transition-colors"
@@ -56,7 +50,6 @@ const HeroSection = () => {
         </div>
       </div>
 
-      {/* Banner Images */}
       <div className="w-full">
         <img
           src={bannerEmpreender}
@@ -66,7 +59,6 @@ const HeroSection = () => {
         />
       </div>
 
-      {/* Video in separate container */}
       <div className="bg-background py-12 md:py-16">
         <div className="container-narrow px-4">
           <motion.div
@@ -85,7 +77,6 @@ const HeroSection = () => {
           </motion.div>
         </div>
       </div>
-
     </section>
   );
 };

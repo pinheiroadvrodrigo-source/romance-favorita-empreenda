@@ -1,6 +1,5 @@
 import { Heart } from "lucide-react";
-
-const WHATSAPP_LINK = "https://wa.me/5591991198584?text=Vim%20atrav%C3%A9s%20do%20site%20da%20Romance%20Favorita%20e%20gostaria%20de%20fazer%20um%20or%C3%A7amento%20para%20cria%C3%A7%C3%A3o%20do%20meu.";
+import { WHATSAPP_URL } from "@/lib/whatsapp";
 
 const Footer = () => (
   <footer id="contato" className="bg-secondary text-secondary-foreground py-16 px-4">
@@ -22,6 +21,7 @@ const Footer = () => (
             <li><a href="#beneficios" className="hover:text-primary transition-colors">Benefícios</a></li>
             <li><a href="#como-funciona" className="hover:text-primary transition-colors">Como Funciona</a></li>
             <li><a href="#cadastro" className="hover:text-primary transition-colors">Cadastro</a></li>
+            <li><a href="/blog" className="hover:text-primary transition-colors">Blog</a></li>
           </ul>
         </div>
 
@@ -32,9 +32,8 @@ const Footer = () => (
             <li>📧 contato@romancefavorita.com</li>
             <li>🕒 Seg a Sex: 8h às 18h</li>
           </ul>
-          {/* Rectangular WhatsApp Button */}
           <a
-            href={WHATSAPP_LINK}
+            href={WHATSAPP_URL}
             target="_blank"
             rel="noopener noreferrer"
             className="mt-4 inline-flex items-center gap-2 bg-[#25D366] text-white px-6 py-3 rounded-lg font-bold text-sm hover:bg-[#20BD5A] transition-colors shadow-md"

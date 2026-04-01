@@ -1,9 +1,9 @@
-const WhatsAppButton = () => {
-  const url = "https://wa.me/5591991198584?text=Vim%20atrav%C3%A9s%20do%20site%20da%20Romance%20Favorita%20e%20gostaria%20de%20fazer%20um%20or%C3%A7amento%20para%20cria%C3%A7%C3%A3o%20do%20meu.";
+import { WHATSAPP_URL } from "@/lib/whatsapp";
 
+const WhatsAppButton = () => {
   return (
     <a
-      href={url}
+      href={WHATSAPP_URL}
       target="_blank"
       rel="noopener noreferrer"
       className="fixed bottom-6 right-6 z-50 flex items-center justify-center w-16 h-16 rounded-full bg-[#25D366] shadow-[0_6px_20px_rgba(37,211,102,0.4)] hover:shadow-[0_8px_28px_rgba(37,211,102,0.55)] hover:scale-110 transition-all duration-300 animate-whatsapp-pulse"
