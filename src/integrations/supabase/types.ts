@@ -76,6 +76,8 @@ export type Database = {
       }
       registrations: {
         Row: {
+          bairro: string | null
+          cidade: string | null
           cpf: string
           created_at: string
           data_nascimento: string
@@ -83,6 +85,8 @@ export type Database = {
           nome: string
         }
         Insert: {
+          bairro?: string | null
+          cidade?: string | null
           cpf: string
           created_at?: string
           data_nascimento: string
@@ -90,6 +94,8 @@ export type Database = {
           nome: string
         }
         Update: {
+          bairro?: string | null
+          cidade?: string | null
           cpf?: string
           created_at?: string
           data_nascimento?: string
