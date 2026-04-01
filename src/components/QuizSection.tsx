@@ -90,12 +90,10 @@ const QuizSection = () => {
       return;
     }
     setLoading(true);
-    const msg = `Olá, acabei de fazer o quiz e quero começar como empreendedora!\n\nNome: ${form.nome}\nWhatsApp: ${form.whatsapp}\nEmail: ${form.email}\nPerfil: ${profile}\nPotencial: ${result.range}`;
-    const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
     setTimeout(() => {
       setLoading(false);
       toast.success("Dados enviados! Redirecionando para o WhatsApp...");
-      window.open(url, "_blank");
+      window.open(WHATSAPP_URL, "_blank");
     }, 800);
   };
 

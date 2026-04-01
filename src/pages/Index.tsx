@@ -44,6 +44,7 @@ const Index = () => {
     <Footer />
     <WhatsAppButton />
   </>
-);
+  );
+};
 
 export default Index;

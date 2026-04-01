@@ -61,11 +61,7 @@ const EarningsSimulator = () => {
   const isValid = vendas >= 230;
 
   const handleCTA = () => {
-    const msg = `Olá, fiz a simulação e quero começar como empreendedora!\nVendas estimadas: ${formatCurrency(vendas)}\nLucro potencial: ${formatCurrency(lucro30)} a ${formatCurrency(lucro40)}`;
-    window.open(
-      `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`,
-      "_blank"
-    );
+    window.open(WHATSAPP_URL, "_blank");
   };
 
   return (
