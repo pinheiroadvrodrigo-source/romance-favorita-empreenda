@@ -47,7 +47,7 @@ const RegistrationForm = () => {
 
     toast.success("Cadastro enviado com sucesso! Redirecionando para o WhatsApp...");
     window.open(WHATSAPP_URL, "_blank");
-    setForm({ nome: "", cpf: "", data_nascimento: "" });
+    setForm({ nome: "", cpf: "", data_nascimento: "", cidade: "", bairro: "" });
     setLoading(false);
   };
 
