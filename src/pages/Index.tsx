@@ -13,6 +13,7 @@ import FAQSection from "@/components/FAQSection";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import ScrollProgress from "@/components/ScrollProgress";
+import SocialProofNotifications from "@/components/SocialProofNotifications";
 import { usePageView } from "@/hooks/usePageView";
 
 const Index = () => {
