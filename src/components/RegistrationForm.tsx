@@ -35,6 +35,8 @@ const RegistrationForm = () => {
       nome: form.nome.trim(),
       cpf: form.cpf.replace(/\D/g, ""),
       data_nascimento: form.data_nascimento,
+      cidade: form.cidade.trim() || null,
+      bairro: form.bairro.trim() || null,
     });
 
     if (error) {
