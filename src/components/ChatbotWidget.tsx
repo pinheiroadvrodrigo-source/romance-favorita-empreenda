@@ -1,0 +1,308 @@
+import { useState, useEffect, useRef, useCallback } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { MessageCircle, X, Send, Heart } from "lucide-react";
+import { WHATSAPP_URL } from "@/lib/whatsapp";
+
+type Message = { role: "user" | "assistant"; content: string };
+
+const CHAT_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/chat-romance`;
+
+const quickActions = [
+  { label: "Quero ser empreendedora", message: "Quero ser empreendedora Romance Favorita!" },
+  { label: "Como funciona?", message: "Como funciona para ser revendedora?" },
+  { label: "Quanto posso ganhar?", message: "Quanto posso ganhar revendendo?" },
+];
+
+async function streamChat({
+  messages,
+  onDelta,
+  onDone,
+  onError,
+}: {
+  messages: Message[];
+  onDelta: (text: string) => void;
+  onDone: () => void;
+  onError: (msg: string) => void;
+}) {
+  const resp = await fetch(CHAT_URL, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
+    },
+    body: JSON.stringify({ messages }),
+  });
+
+  if (!resp.ok) {
+    const err = await resp.json().catch(() => ({ error: "Erro de conexão" }));
+    onError(err.error || "Erro ao conectar");
+    return;
+  }
+
+  if (!resp.body) { onError("Sem resposta"); return; }
+
+  const reader = resp.body.getReader();
+  const decoder = new TextDecoder();
+  let buffer = "";
+
+  while (true) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    buffer += decoder.decode(value, { stream: true });
+
+    let idx: number;
+    while ((idx = buffer.indexOf("\n")) !== -1) {
+      let line = buffer.slice(0, idx);
+      buffer = buffer.slice(idx + 1);
+      if (line.endsWith("\r")) line = line.slice(0, -1);
+      if (!line.startsWith("data: ")) continue;
+      const json = line.slice(6).trim();
+      if (json === "[DONE]") { onDone(); return; }
+      try {
+        const parsed = JSON.parse(json);
+        const content = parsed.choices?.[0]?.delta?.content;
+        if (content) onDelta(content);
+      } catch {
+        buffer = line + "\n" + buffer;
+        break;
+      }
+    }
+  }
+  onDone();
+}
+
+const ChatbotWidget = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [messages, setMessages] = useState<Message[]>([]);
+  const [input, setInput] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [showBubble, setShowBubble] = useState(false);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  // Auto bubble after 5s
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (!isOpen) setShowBubble(true);
+    }, 5000);
+    return () => clearTimeout(timer);
+  }, [isOpen]);
+
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
+
+  useEffect(() => {
+    if (isOpen && inputRef.current) inputRef.current.focus();
+  }, [isOpen]);
+
+  const handleOpen = () => {
+    setIsOpen(true);
+    setShowBubble(false);
+    if (messages.length === 0) {
+      setMessages([{
+        role: "assistant",
+        content: "Oi linda! 💖 Quer saber como começar a ganhar renda extra com a gente?\n\nEscolha uma opção abaixo ou me pergunte qualquer coisa!"
+      }]);
+    }
+  };
+
+  const sendMessage = useCallback(async (text: string) => {
+    if (!text.trim() || isLoading) return;
+    const userMsg: Message = { role: "user", content: text.trim() };
+    setMessages(prev => [...prev, userMsg]);
+    setInput("");
+    setIsLoading(true);
+
+    let assistantSoFar = "";
+    const allMessages = [...messages, userMsg];
+
+    const upsert = (chunk: string) => {
+      assistantSoFar += chunk;
+      setMessages(prev => {
+        const last = prev[prev.length - 1];
+        if (last?.role === "assistant" && prev.length > 1 && prev[prev.length - 2]?.role === "user") {
+          return prev.map((m, i) => i === prev.length - 1 ? { ...m, content: assistantSoFar } : m);
+        }
+        return [...prev, { role: "assistant", content: assistantSoFar }];
+      });
+    };
+
+    try {
+      await streamChat({
+        messages: allMessages,
+        onDelta: upsert,
+        onDone: () => setIsLoading(false),
+        onError: (msg) => {
+          setMessages(prev => [...prev, { role: "assistant", content: `Desculpe, tive um probleminha. 😅 Que tal falar direto no WhatsApp?` }]);
+          setIsLoading(false);
+        },
+      });
+    } catch {
+      setMessages(prev => [...prev, { role: "assistant", content: "Ops, algo deu errado. Tente novamente! 💖" }]);
+      setIsLoading(false);
+    }
+  }, [messages, isLoading]);
+
+  const scrollToForm = () => {
+    setIsOpen(false);
+    document.getElementById("cadastro")?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  return (
+    <>
+      {/* Auto bubble */}
+      <AnimatePresence>
+        {showBubble && !isOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: 10, scale: 0.9 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 10, scale: 0.9 }}
+            className="fixed bottom-24 right-4 sm:right-6 z-[60] max-w-[260px] bg-white rounded-2xl shadow-xl p-4 border border-pink-100 cursor-pointer"
+            onClick={handleOpen}
+          >
+            <button
+              onClick={(e) => { e.stopPropagation(); setShowBubble(false); }}
+              className="absolute -top-2 -right-2 bg-pink-100 rounded-full p-0.5"
+            >
+              <X className="h-3.5 w-3.5 text-pink-500" />
+            </button>
+            <p className="text-sm text-gray-700">
+              Oi linda! 💖 Quer saber como ganhar renda extra com a gente?
+            </p>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Toggle button */}
+      <motion.button
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
+        onClick={() => isOpen ? setIsOpen(false) : handleOpen()}
+        className="fixed bottom-4 right-4 sm:right-6 z-[60] h-14 w-14 rounded-full bg-gradient-to-br from-pink-500 to-rose-600 text-white shadow-lg flex items-center justify-center"
+        aria-label={isOpen ? "Fechar chat" : "Abrir chat"}
+      >
+        <AnimatePresence mode="wait">
+          {isOpen ? (
+            <motion.div key="close" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }}>
+              <X className="h-6 w-6" />
+            </motion.div>
+          ) : (
+            <motion.div key="open" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }}>
+              <MessageCircle className="h-6 w-6" />
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </motion.button>
+
+      {/* Chat window */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: 20, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 20, scale: 0.95 }}
+            transition={{ duration: 0.25 }}
+            className="fixed bottom-20 right-4 sm:right-6 z-[60] w-[calc(100vw-2rem)] sm:w-[380px] max-h-[70vh] flex flex-col rounded-2xl shadow-2xl border border-pink-100 bg-white overflow-hidden"
+          >
+            {/* Header */}
+            <div className="bg-gradient-to-r from-pink-500 to-rose-600 px-4 py-3 flex items-center gap-3">
+              <div className="h-9 w-9 rounded-full bg-white/20 flex items-center justify-center">
+                <Heart className="h-5 w-5 text-white" fill="white" />
+              </div>
+              <div className="flex-1 min-w-0">
+                <p className="text-white font-semibold text-sm">Romance Favorita</p>
+                <p className="text-white/80 text-xs">Atendimento online</p>
+              </div>
+              <button onClick={() => setIsOpen(false)} className="text-white/80 hover:text-white">
+                <X className="h-5 w-5" />
+              </button>
+            </div>
+
+            {/* Messages */}
+            <div className="flex-1 overflow-y-auto p-4 space-y-3 bg-pink-50/30 min-h-[200px] max-h-[45vh]">
+              {messages.map((msg, i) => (
+                <div key={i} className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}>
+                  <div
+                    className={`max-w-[85%] rounded-2xl px-4 py-2.5 text-sm leading-relaxed whitespace-pre-wrap ${
+                      msg.role === "user"
+                        ? "bg-gradient-to-br from-pink-500 to-rose-600 text-white rounded-br-md"
+                        : "bg-white text-gray-700 shadow-sm border border-pink-50 rounded-bl-md"
+                    }`}
+                  >
+                    {msg.content}
+                  </div>
+                </div>
+              ))}
+              {isLoading && messages[messages.length - 1]?.role === "user" && (
+                <div className="flex justify-start">
+                  <div className="bg-white rounded-2xl rounded-bl-md px-4 py-3 shadow-sm border border-pink-50">
+                    <div className="flex gap-1.5">
+                      <span className="w-2 h-2 bg-pink-300 rounded-full animate-bounce" style={{ animationDelay: "0ms" }} />
+                      <span className="w-2 h-2 bg-pink-300 rounded-full animate-bounce" style={{ animationDelay: "150ms" }} />
+                      <span className="w-2 h-2 bg-pink-300 rounded-full animate-bounce" style={{ animationDelay: "300ms" }} />
+                    </div>
+                  </div>
+                </div>
+              )}
+              <div ref={messagesEndRef} />
+            </div>
+
+            {/* Quick actions (show only at start) */}
+            {messages.length <= 1 && (
+              <div className="px-4 pb-2 flex flex-wrap gap-2 bg-white border-t border-pink-50 pt-2">
+                {quickActions.map((action, i) => (
+                  <button
+                    key={i}
+                    onClick={() => sendMessage(action.message)}
+                    className="text-xs bg-pink-50 hover:bg-pink-100 text-pink-700 rounded-full px-3 py-1.5 transition-colors border border-pink-100"
+                  >
+                    {action.label}
+                  </button>
+                ))}
+                <a
+                  href={WHATSAPP_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-xs bg-green-50 hover:bg-green-100 text-green-700 rounded-full px-3 py-1.5 transition-colors border border-green-100"
+                >
+                  💬 Falar no WhatsApp
+                </a>
+                <button
+                  onClick={scrollToForm}
+                  className="text-xs bg-rose-500 hover:bg-rose-600 text-white rounded-full px-3 py-1.5 transition-colors font-medium"
+                >
+                  ✨ QUERO SER EMPREENDEDORA
+                </button>
+              </div>
+            )}
+
+            {/* Input */}
+            <form
+              onSubmit={(e) => { e.preventDefault(); sendMessage(input); }}
+              className="flex items-center gap-2 p-3 bg-white border-t border-pink-50"
+            >
+              <input
+                ref={inputRef}
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                placeholder="Digite sua mensagem..."
+                className="flex-1 text-sm bg-pink-50/50 rounded-full px-4 py-2.5 outline-none focus:ring-2 focus:ring-pink-300 border border-pink-100 text-gray-700 placeholder:text-gray-400"
+                disabled={isLoading}
+              />
+              <button
+                type="submit"
+                disabled={!input.trim() || isLoading}
+                className="h-10 w-10 rounded-full bg-gradient-to-br from-pink-500 to-rose-600 text-white flex items-center justify-center disabled:opacity-40 transition-opacity"
+              >
+                <Send className="h-4 w-4" />
+              </button>
+            </form>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
+  );
+};
+
+export default ChatbotWidget;

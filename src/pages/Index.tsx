@@ -14,6 +14,7 @@ import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import ScrollProgress from "@/components/ScrollProgress";
 import SocialProofNotifications from "@/components/SocialProofNotifications";
+import ChatbotWidget from "@/components/ChatbotWidget";
 import { usePageView } from "@/hooks/usePageView";
 
 const Index = () => {
@@ -45,6 +46,7 @@ const Index = () => {
     <Footer />
     <WhatsAppButton />
     <SocialProofNotifications />
+    <ChatbotWidget />
   </>
   );
 };
