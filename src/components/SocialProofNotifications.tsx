@@ -3,10 +3,13 @@ import { motion, AnimatePresence } from "framer-motion";
 import { CheckCircle } from "lucide-react";
 
 const names = [
-  "Camila", "Jamile", "Ronaldo", "Fernanda", "Aline", "Beatriz", "Lucas",
-  "Mariana", "Juliana", "Carlos", "Patrícia", "Rafael", "Vanessa", "Thiago",
-  "Larissa", "André", "Gabriela", "Diego", "Priscila", "Roberto", "Tatiane",
-  "Eduardo", "Renata", "Bianca", "Marcos"
+  "Camila", "Jamile", "Fernanda", "Aline", "Beatriz",
+  "Mariana", "Juliana", "Patrícia", "Vanessa",
+  "Larissa", "Gabriela", "Priscila", "Tatiane",
+  "Renata", "Bianca", "Amanda", "Carolina", "Débora",
+  "Elaine", "Fabiana", "Helena", "Isabela", "Jéssica",
+  "Kelly", "Letícia", "Michele", "Natália", "Raquel",
+  "Simone", "Viviane"
 ];
 
 const messages = [
@@ -18,8 +21,14 @@ const messages = [
   (n: string) => `${n} iniciou sua jornada empreendedora`,
 ];
 
-const cities = [
-  "São Paulo/SP", "Belém/PA", "Rio de Janeiro/RJ", "Manaus/AM",
+// Cidades do Pará primeiro, depois outras
+const citiesPara = [
+  "Belém/PA", "Ananindeua/PA", "Castanhal/PA", "Parauapebas/PA",
+  "Paragominas/PA", "Santarém/PA", "Moju/PA", "Almeirim/PA",
+];
+
+const citiesOther = [
+  "São Paulo/SP", "Rio de Janeiro/RJ", "Manaus/AM",
   "Salvador/BA", "Fortaleza/CE", "Curitiba/PR", "Recife/PE",
   "Belo Horizonte/MG", "Brasília/DF", "Goiânia/GO", "Porto Alegre/RS",
 ];
@@ -30,20 +39,21 @@ function getRandomItem<T>(arr: T[]): T {
 
 const SocialProofNotifications = () => {
   const [notification, setNotification] = useState<{ name: string; message: string; city: string; id: number } | null>(null);
+  const [count, setCount] = useState(0);
 
   const showNotification = useCallback(() => {
     const name = getRandomItem(names);
     const msg = getRandomItem(messages)(name);
-    const city = getRandomItem(cities);
+    // Primeiras ~8 notificações priorizam cidades do Pará
+    const city = count < 8 ? getRandomItem(citiesPara) : getRandomItem([...citiesPara, ...citiesOther]);
     setNotification({ name, message: msg, city, id: Date.now() });
+    setCount(prev => prev + 1);
 
-    // Hide after 4-6 seconds
     const hideDelay = 4000 + Math.random() * 2000;
     setTimeout(() => setNotification(null), hideDelay);
-  }, []);
+  }, [count]);
 
   useEffect(() => {
-    // First notification after 8 seconds
     const initialTimeout = setTimeout(() => {
       showNotification();
     }, 8000);

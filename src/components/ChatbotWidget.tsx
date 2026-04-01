@@ -1,7 +1,8 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { MessageCircle, X, Send, Heart } from "lucide-react";
+import { X, Send, Heart } from "lucide-react";
 import { WHATSAPP_URL } from "@/lib/whatsapp";
+import chatbotAvatar from "@/assets/chatbot-avatar.png";
 
 type Message = { role: "user" | "assistant"; content: string };
 
