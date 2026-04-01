@@ -1,1 +1,1 @@
-export const WHATSAPP_URL = "https://wa.me/5591991198584?text=Vim%20atrav%C3%A9s%20do%20site%20da%20Romance%20Favorita%20e%20gostaria%20de%20fazer%20um%20or%C3%A7amento%20para%20cria%C3%A7%C3%A3o%20do%20meu.";
+export const WHATSAPP_URL = "https://wa.me/559198377628?text=Ol%C3%A1%20Paulo%2C%20vi%20no%20google%20seu%20site%20e%20gostaria%20de%20maiores%20informa%C3%A7%C3%B5es%20sobre%20a%20Romance";
