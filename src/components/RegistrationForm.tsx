@@ -9,6 +9,8 @@ const RegistrationForm = () => {
     nome: "",
     cpf: "",
     data_nascimento: "",
+    cidade: "",
+    bairro: "",
   });
   const [loading, setLoading] = useState(false);
 
