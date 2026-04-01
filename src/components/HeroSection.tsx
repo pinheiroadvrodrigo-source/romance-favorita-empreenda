@@ -1,21 +1,24 @@
 import { motion } from "framer-motion";
 import bannerEmpreender from "@/assets/banner-empreender.png";
+import pauloImg from "@/assets/paulo.jpg";
 import { WHATSAPP_URL } from "@/lib/whatsapp";
 
 const HeroSection = () => {
   return (
     <section id="home" className="relative overflow-hidden">
       <div className="bg-secondary">
-        <div className="container-narrow px-4 py-16 md:py-24 text-center">
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7 }}
-            className="text-4xl md:text-6xl lg:text-7xl font-display font-bold text-secondary-foreground mb-6 text-balance"
-          >
-            Independência para{" "}
-            <span className="gradient-text">realizar seus sonhos!</span>
-          </motion.h1>
+        <div className="container-narrow px-4 py-16 md:py-24">
+          <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12">
+            <div className="flex-1 text-center md:text-left">
+              <motion.h1
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7 }}
+                className="text-4xl md:text-6xl lg:text-7xl font-display font-bold text-secondary-foreground mb-6 text-balance"
+              >
+                Independência para{" "}
+                <span className="gradient-text">realizar seus sonhos!</span>
+              </motion.h1>
 
           <motion.p
             initial={{ opacity: 0, y: 20 }}
