@@ -28,7 +28,7 @@ const Footer = () => (
         <div>
           <h4 className="font-bold mb-4">Contato</h4>
           <ul className="space-y-2 text-sm text-secondary-foreground/70">
-            <li>📱 WhatsApp: (91) 98377-7628</li>
+            <li>📱 WhatsApp: (91) 99837-7628</li>
             <li>📧 contato@romancefavorita.com</li>
             <li>🕒 Seg a Sex: 8h às 18h</li>
           </ul>
