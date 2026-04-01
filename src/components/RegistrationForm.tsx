@@ -110,6 +110,33 @@ const RegistrationForm = () => {
               />
             </div>
 
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <label className="text-secondary-foreground/80 text-sm font-medium mb-1 block">
+                  Cidade
+                </label>
+                <input
+                  type="text"
+                  placeholder="Sua cidade"
+                  value={form.cidade}
+                  onChange={(e) => setForm({ ...form, cidade: e.target.value })}
+                  className="w-full px-4 py-3 rounded-lg bg-background text-foreground border border-border focus:ring-2 focus:ring-primary focus:outline-none"
+                />
+              </div>
+              <div>
+                <label className="text-secondary-foreground/80 text-sm font-medium mb-1 block">
+                  Bairro
+                </label>
+                <input
+                  type="text"
+                  placeholder="Seu bairro"
+                  value={form.bairro}
+                  onChange={(e) => setForm({ ...form, bairro: e.target.value })}
+                  className="w-full px-4 py-3 rounded-lg bg-background text-foreground border border-border focus:ring-2 focus:ring-primary focus:outline-none"
+                />
+              </div>
+            </div>
+
             <div className="bg-primary/10 rounded-lg p-3 text-sm text-secondary-foreground/80">
               ✅ Interesse: Quero revender
             </div>
