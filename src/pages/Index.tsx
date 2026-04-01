@@ -44,6 +44,7 @@ const Index = () => {
     </main>
     <Footer />
     <WhatsAppButton />
+    <SocialProofNotifications />
   </>
   );
 };
