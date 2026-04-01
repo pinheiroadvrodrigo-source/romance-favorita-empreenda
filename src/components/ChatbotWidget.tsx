@@ -177,20 +177,20 @@ const ChatbotWidget = () => {
 
       {/* Toggle button */}
       <motion.button
-        whileHover={{ scale: 1.05 }}
+        whileHover={{ scale: 1.08 }}
         whileTap={{ scale: 0.95 }}
         onClick={() => isOpen ? setIsOpen(false) : handleOpen()}
-        className="fixed bottom-4 right-4 sm:right-6 z-[60] h-14 w-14 rounded-full bg-gradient-to-br from-pink-500 to-rose-600 text-white shadow-lg flex items-center justify-center"
+        className="fixed bottom-4 right-4 sm:right-6 z-[60] h-16 w-16 rounded-full shadow-xl flex items-center justify-center overflow-hidden ring-2 ring-pink-300 ring-offset-2"
         aria-label={isOpen ? "Fechar chat" : "Abrir chat"}
       >
         <AnimatePresence mode="wait">
           {isOpen ? (
-            <motion.div key="close" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }}>
-              <X className="h-6 w-6" />
+            <motion.div key="close" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }} className="absolute inset-0 bg-gradient-to-br from-pink-500 to-rose-600 flex items-center justify-center">
+              <X className="h-6 w-6 text-white" />
             </motion.div>
           ) : (
-            <motion.div key="open" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }}>
-              <MessageCircle className="h-6 w-6" />
+            <motion.div key="open" initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.8, opacity: 0 }} className="w-full h-full">
+              <img src={chatbotAvatar} alt="Atendimento" className="w-full h-full object-cover" loading="lazy" width={512} height={512} />
             </motion.div>
           )}
         </AnimatePresence>
