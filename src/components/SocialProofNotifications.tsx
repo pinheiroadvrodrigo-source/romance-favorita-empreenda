@@ -69,25 +69,25 @@ const SocialProofNotifications = () => {
   }, [showNotification]);
 
   return (
-    <div className="fixed bottom-20 left-4 z-50 max-w-[320px] sm:bottom-6 sm:left-6">
+    <div className="fixed top-4 right-4 z-50 max-w-[280px] sm:top-6 sm:right-6">
       <AnimatePresence>
         {notification && (
           <motion.div
             key={notification.id}
-            initial={{ opacity: 0, y: 30, scale: 0.95 }}
+            initial={{ opacity: 0, y: -20, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 20, scale: 0.95 }}
+            exit={{ opacity: 0, y: -15, scale: 0.95 }}
             transition={{ duration: 0.4, ease: "easeOut" }}
-            className="flex items-start gap-3 rounded-xl bg-white p-4 shadow-lg border border-gray-100"
+            className="flex items-start gap-2 rounded-lg bg-white p-3 shadow-md border border-gray-100"
           >
             <div className="flex-shrink-0 mt-0.5">
-              <CheckCircle className="h-5 w-5 text-green-500" />
+              <CheckCircle className="h-4 w-4 text-green-500" />
             </div>
             <div className="min-w-0">
-              <p className="text-sm font-medium text-gray-800 leading-snug">
+              <p className="text-xs font-medium text-gray-700 leading-snug">
                 {notification.message}
               </p>
-              <p className="text-xs text-gray-400 mt-1">{notification.city} • agora mesmo</p>
+              <p className="text-[10px] text-gray-400 mt-0.5">{notification.city} • agora mesmo</p>
             </div>
           </motion.div>
         )}
