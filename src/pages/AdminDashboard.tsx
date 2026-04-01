@@ -267,4 +267,84 @@ const AdminDashboard = () => {
   );
 };
 
+const RegistrationsTab = ({ registrations }: { registrations: any[] }) => {
+  const [dateFrom, setDateFrom] = useState<Date | undefined>(undefined);
+  const [dateTo, setDateTo] = useState<Date | undefined>(undefined);
+
+  const filtered = registrations.filter((r) => {
+    const d = new Date(r.created_at);
+    if (dateFrom && d < new Date(dateFrom.setHours(0, 0, 0, 0))) return false;
+    if (dateTo && d > new Date(new Date(dateTo).setHours(23, 59, 59, 999))) return false;
+    return true;
+  });
+
+  return (
+    <div>
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
+        <h2 className="text-xl font-bold">Cadastros ({filtered.length})</h2>
+        <div className="flex items-center gap-2 flex-wrap">
+          <Popover>
+            <PopoverTrigger asChild>
+              <Button variant="outline" size="sm" className={cn("gap-2 text-xs", !dateFrom && "text-muted-foreground")}>
+                <CalendarIcon className="h-3.5 w-3.5" />
+                {dateFrom ? format(dateFrom, "dd/MM/yyyy") : "Data início"}
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent className="w-auto p-0" align="start">
+              <Calendar mode="single" selected={dateFrom} onSelect={setDateFrom} locale={ptBR} className="p-3 pointer-events-auto" />
+            </PopoverContent>
+          </Popover>
+          <span className="text-muted-foreground text-xs">até</span>
+          <Popover>
+            <PopoverTrigger asChild>
+              <Button variant="outline" size="sm" className={cn("gap-2 text-xs", !dateTo && "text-muted-foreground")}>
+                <CalendarIcon className="h-3.5 w-3.5" />
+                {dateTo ? format(dateTo, "dd/MM/yyyy") : "Data fim"}
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent className="w-auto p-0" align="start">
+              <Calendar mode="single" selected={dateTo} onSelect={setDateTo} locale={ptBR} className="p-3 pointer-events-auto" />
+            </PopoverContent>
+          </Popover>
+          {(dateFrom || dateTo) && (
+            <Button variant="ghost" size="sm" className="text-xs" onClick={() => { setDateFrom(undefined); setDateTo(undefined); }}>
+              Limpar
+            </Button>
+          )}
+        </div>
+      </div>
+      <div className="bg-card rounded-xl shadow-sm overflow-x-auto">
+        {filtered.length === 0 ? (
+          <p className="p-6 text-center text-muted-foreground">Nenhum cadastro encontrado.</p>
+        ) : (
+          <table className="w-full text-sm">
+            <thead>
+              <tr className="border-b border-border text-left">
+                <th className="p-4 font-medium">Nome</th>
+                <th className="p-4 font-medium">CPF</th>
+                <th className="p-4 font-medium">Data Nasc.</th>
+                <th className="p-4 font-medium">Cidade</th>
+                <th className="p-4 font-medium">Bairro</th>
+                <th className="p-4 font-medium">Data Cadastro</th>
+              </tr>
+            </thead>
+            <tbody>
+              {filtered.map((r: any) => (
+                <tr key={r.id} className="border-b border-border">
+                  <td className="p-4">{r.nome}</td>
+                  <td className="p-4">{r.cpf}</td>
+                  <td className="p-4">{new Date(r.data_nascimento).toLocaleDateString("pt-BR")}</td>
+                  <td className="p-4">{r.cidade || "—"}</td>
+                  <td className="p-4">{r.bairro || "—"}</td>
+                  <td className="p-4">{new Date(r.created_at).toLocaleDateString("pt-BR")}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
+      </div>
+    </div>
+  );
+};
+
 export default AdminDashboard;
