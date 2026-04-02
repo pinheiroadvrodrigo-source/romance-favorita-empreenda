@@ -42,7 +42,7 @@ const Footer = () => (
         </p>
         <p className="mb-4">Site desenvolvido por <span className="font-semibold text-secondary-foreground/70">Rodrigo Pinheiro</span></p>
         <a
-          href={WHATSAPP_URL}
+          href="https://api.whatsapp.com/send?phone=5591991198584&text=Ol%C3%A1%20Rodrigo%2C%20tudo%20bem%3F%20Conheci%20o%20site%20da%20Romance%20Favorita%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es%20sobre%20a%20cria%C3%A7%C3%A3o%20de%20sites.%20Poderia%20me%20ajudar%3F"
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center gap-2 bg-[#25D366] text-white px-6 py-3 rounded-lg font-bold text-sm hover:bg-[#20BD5A] transition-colors shadow-md"
