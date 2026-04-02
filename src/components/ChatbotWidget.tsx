@@ -81,13 +81,22 @@ const ChatbotWidget = () => {
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  // Auto bubble after 5s
+  // Auto bubble after 5s, auto-hide after another 5s
   useEffect(() => {
-    const timer = setTimeout(() => {
+    const showTimer = setTimeout(() => {
       if (!isOpen) setShowBubble(true);
     }, 5000);
-    return () => clearTimeout(timer);
+    return () => clearTimeout(showTimer);
   }, [isOpen]);
+
+  useEffect(() => {
+    if (showBubble && !isOpen) {
+      const hideTimer = setTimeout(() => {
+        setShowBubble(false);
+      }, 5000);
+      return () => clearTimeout(hideTimer);
+    }
+  }, [showBubble, isOpen]);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
