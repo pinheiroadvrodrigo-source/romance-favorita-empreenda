@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -58,7 +58,12 @@
   body {
     @apply bg-background text-foreground font-sans;
   }
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     @apply font-display;
   }
 }
@@ -94,7 +99,8 @@
 }
 
 @keyframes whatsapp-pulse {
-  0%, 100% {
+  0%,
+  100% {
     box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.5);
   }
   50% {
@@ -107,15 +113,31 @@
 }
 
 @keyframes orange-glow {
-  0%, 100% {
-    box-shadow: 0 0 15px 5px rgba(255, 140, 0, 0.6), 0 0 30px 10px rgba(255, 140, 0, 0.3);
+  0%,
+  100% {
+    box-shadow:
+      0 0 15px 5px rgba(255, 140, 0, 0.6),
+      0 0 30px 10px rgba(255, 140, 0, 0.3);
   }
   50% {
-    box-shadow: 0 0 25px 10px rgba(255, 165, 0, 0.8), 0 0 50px 20px rgba(255, 140, 0, 0.4);
+    box-shadow:
+      0 0 25px 10px rgba(255, 165, 0, 0.8),
+      0 0 50px 20px rgba(255, 140, 0, 0.4);
   }
 }
 
 .animate-orange-glow {
   animation: orange-glow 1.5s ease-in-out infinite;
   border: 3px solid rgba(255, 140, 0, 0.8);
+}
+a[href*="lovable.dev"],
+iframe[src*="lovable.dev"],
+div[style*="Edit with Lovable"],
+.lovable-badge {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  position: absolute !important;
+  z-index: -9999 !important;
 }
