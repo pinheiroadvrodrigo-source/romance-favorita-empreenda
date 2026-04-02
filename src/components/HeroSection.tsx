@@ -69,6 +69,9 @@ const HeroSection = () => {
                   className="w-full h-full object-cover rounded-full"
                 />
               </div>
+              <p className="text-center text-sm md:text-base font-semibold text-secondary-foreground mt-4">
+                Licenciados da Romance: Cristiano e Wanda
+              </p>
             </motion.div>
           </div>
         </div>
