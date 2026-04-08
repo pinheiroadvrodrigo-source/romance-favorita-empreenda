@@ -45,8 +45,10 @@ const RegistrationForm = () => {
       return;
     }
 
+    const mensagem = `Olá Cristiano e Wanda, acabei de me cadastrar no site da Romance Favorita!\n\n📋 *Dados do cadastro:*\n👤 Nome: ${form.nome.trim()}\n📄 CPF: ${form.cpf}\n📅 Nascimento: ${form.data_nascimento.split("-").reverse().join("/")}\n🏙️ Cidade: ${form.cidade.trim() || "Não informada"}\n🏘️ Bairro: ${form.bairro.trim() || "Não informado"}\n\nGostaria de mais informações sobre a Romance Favorita.`;
+    const whatsappComDados = `https://api.whatsapp.com/send/?phone=559198377628&text=${encodeURIComponent(mensagem)}&type=phone_number&app_absent=0`;
     toast.success("Cadastro enviado com sucesso! Redirecionando para o WhatsApp...");
-    window.open(WHATSAPP_URL, "_blank");
+    window.open(whatsappComDados, "_blank");
     setForm({ nome: "", cpf: "", data_nascimento: "", cidade: "", bairro: "" });
     setLoading(false);
   };
