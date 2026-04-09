@@ -140,9 +140,9 @@ const QuizSection = () => {
               {step < questions.length && (
                 <motion.div
                   key={`q-${step}`}
-                  initial={{ opacity: 0, x: 40 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -40 }}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
                   transition={{ duration: 0.35 }}
                   className="w-full"
                 >
