@@ -25,6 +25,7 @@ const Index = () => {
     <Header />
     <main>
       <HeroSection />
+      <RegistrationForm />
       <BenefitsSection />
       <QuizSection />
       <EarningsSimulator />
@@ -39,7 +40,6 @@ const Index = () => {
           loading="lazy"
         />
       </div>
-      <RegistrationForm />
       <BlogSection />
       <FAQSection />
     </main>
