@@ -24,7 +24,6 @@ const Index = () => {
     <Header />
     <main>
       <HeroSection />
-      <RegistrationForm />
       <BenefitsSection />
       <QuizSection />
       <EarningsSimulator />
