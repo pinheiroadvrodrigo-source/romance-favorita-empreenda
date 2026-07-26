@@ -21,6 +21,8 @@ const HeroSection = () => {
                 <span className="gradient-text">realizar seus sonhos!</span>
               </motion.h1>
 
+              <RegistrationForm />
+
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
