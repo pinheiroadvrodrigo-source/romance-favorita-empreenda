@@ -7,7 +7,6 @@ import VoceNoComando from "@/components/VoceNoComando";
 import bannerBrasileira from "@/assets/banner-brasileira.png";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import HowItWorks from "@/components/HowItWorks";
-import RegistrationForm from "@/components/RegistrationForm";
 import BlogSection from "@/components/BlogSection";
 import FAQSection from "@/components/FAQSection";
 import Footer from "@/components/Footer";
@@ -25,7 +24,6 @@ const Index = () => {
     <Header />
     <main>
       <HeroSection />
-      <RegistrationForm />
       <BenefitsSection />
       <QuizSection />
       <EarningsSimulator />
