@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import bannerEmpreender from "@/assets/banner-empreender.png";
 import pauloImg from "@/assets/paulo.jpg";
 import { WHATSAPP_URL } from "@/lib/whatsapp";
+import RegistrationForm from "@/components/RegistrationForm";
 
 const HeroSection = () => {
   return (
