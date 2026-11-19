@@ -1,3 +1,4 @@
+import { assetUrl } from "@/lib/assetUrl";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -67,7 +68,7 @@ const BlogPage = () => {
                   className="bg-card rounded-xl shadow-sm hover:shadow-lg transition-shadow overflow-hidden group"
                 >
                   {p.image_url && (
-                    <img src={p.image_url} alt={p.title} className="w-full h-48 object-cover" />
+                    <img src={assetUrl(p.image_url)} alt={p.title} className="w-full h-48 object-cover" />
                   )}
                   <div className="p-6">
                     <Link to={`/blog/${p.slug}`}>

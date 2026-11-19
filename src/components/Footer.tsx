@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Heart } from "lucide-react";
 import { WHATSAPP_URL } from "@/lib/whatsapp";
 
@@ -21,7 +22,7 @@ const Footer = () => (
             <li><a href="#beneficios" className="hover:text-primary transition-colors">Benefícios</a></li>
             <li><a href="#como-funciona" className="hover:text-primary transition-colors">Como Funciona</a></li>
             <li><a href="#cadastro" className="hover:text-primary transition-colors">Cadastro</a></li>
-            <li><a href="/blog" className="hover:text-primary transition-colors">Blog</a></li>
+            <li><Link to="/blog" className="hover:text-primary transition-colors">Blog</Link></li>
           </ul>
         </div>
 

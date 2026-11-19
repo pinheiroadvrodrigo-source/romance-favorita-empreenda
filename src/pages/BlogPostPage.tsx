@@ -1,3 +1,4 @@
+import { assetUrl } from "@/lib/assetUrl";
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -76,7 +77,7 @@ const BlogPostPage = () => {
 
           <motion.article initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
             {post.image_url && (
-              <img src={post.image_url} alt={post.title} className="w-full h-64 md:h-96 object-cover rounded-xl mb-8" />
+              <img src={assetUrl(post.image_url)} alt={post.title} className="w-full h-64 md:h-96 object-cover rounded-xl mb-8" />
             )}
             <h1 className="text-3xl md:text-4xl font-display font-bold mb-4">{post.title}</h1>
             <p className="text-muted-foreground text-sm mb-8">
