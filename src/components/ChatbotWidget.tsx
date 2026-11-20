@@ -4,6 +4,7 @@ import { X, Send, Heart } from "lucide-react";
 import { WHATSAPP_URL } from "@/lib/whatsapp";
 import chatbotAvatar from "@/assets/chatbot-avatar.png";
 import { CHAT_KNOWLEDGE } from "@/lib/chatKnowledge";
+import { respostaPronta } from "@/lib/chatFallback";
 
 type Message = { role: "user" | "assistant"; content: string };
 
@@ -29,11 +30,19 @@ async function streamChat({
 }) {
   const resp = await fetch(CHAT_URL, {
     method: "POST",
+    signal: AbortSignal.timeout?.(25000),
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
     },
-    body: JSON.stringify({ messages: [{ role: "system", content: CHAT_KNOWLEDGE }, ...messages] }),
+    body: JSON.stringify({
+      // a base do site vai junto da última pergunta (formato aceito por qualquer versão do servidor)
+      messages: messages.map((m, i) =>
+        i === messages.length - 1 && m.role === "user"
+          ? { ...m, content: `${CHAT_KNOWLEDGE}\n\n---\nPergunta da visitante: ${m.content}` }
+          : m,
+      ),
+    }),
   });
 
   if (!resp.ok) {
@@ -145,14 +154,18 @@ const ChatbotWidget = () => {
       await streamChat({
         messages: allMessages,
         onDelta: upsert,
-        onDone: () => setIsLoading(false),
-        onError: (msg) => {
-          setMessages(prev => [...prev, { role: "assistant", content: `Desculpe, tive um probleminha. 😅 Que tal falar direto no WhatsApp?` }]);
+        onDone: () => {
+          // resposta vazia da IA: usa a resposta pronta
+          if (!assistantSoFar.trim()) upsert(respostaPronta(text));
+          setIsLoading(false);
+        },
+        onError: () => {
+          setMessages(prev => [...prev, { role: "assistant", content: respostaPronta(text) }]);
           setIsLoading(false);
         },
       });
     } catch {
-      setMessages(prev => [...prev, { role: "assistant", content: "Ops, algo deu errado. Tente novamente! 💖" }]);
+      setMessages(prev => [...prev, { role: "assistant", content: respostaPronta(text) }]);
       setIsLoading(false);
     }
   }, [messages, isLoading]);
