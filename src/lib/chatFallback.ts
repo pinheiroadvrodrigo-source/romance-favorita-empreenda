@@ -96,12 +96,14 @@ const REGRAS: Regra[] = [
 
 export const respostaPronta = (pergunta: string): string => {
   const p = norm(pergunta);
-  for (const r of REGRAS) {
-    if (r.palavras.some((w) => {
+  const achadas = REGRAS.filter((r) =>
+    r.palavras.some((w) => {
       const n = norm(w);
       // palavras curtas só valem inteiras (ex.: "oi" não casa com "noite")
       return n.length <= 4 ? new RegExp(`(^|[^a-z])${n.replace(/[%]/g, "\\$&")}([^a-z]|$)`).test(p) : p.includes(n);
-    })) return r.resposta;
-  }
+    }),
+  );
+  // pergunta com dois assuntos: responde os dois
+  if (achadas.length) return achadas.slice(0, 2).map((r) => r.resposta).join("\n\n");
   return `Boa pergunta! 💖 Para essa, o melhor é falar direto com a gente no WhatsApp ${WHATS}. E se quiser começar, o cadastro aqui no site é gratuito!`;
 };
