@@ -10,6 +10,7 @@ import BlogPostPage from "./pages/BlogPostPage.tsx";
 import AdminLogin from "./pages/AdminLogin.tsx";
 import AdminDashboard from "./pages/AdminDashboard.tsx";
 import AdminPostEditor from "./pages/AdminPostEditor.tsx";
+import CriadorExitPopup from "./components/CriadorExitPopup.tsx";
 
 const queryClient = new QueryClient();
 
@@ -30,6 +31,7 @@ const App = () => (
           <Route path="/admin/posts/:id" element={<AdminPostEditor />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
+        <CriadorExitPopup />
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>

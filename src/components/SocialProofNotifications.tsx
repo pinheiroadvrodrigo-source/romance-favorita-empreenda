@@ -69,14 +69,14 @@ const SocialProofNotifications = () => {
   }, [showNotification]);
 
   return (
-    <div className="fixed top-4 right-4 z-50 max-w-[280px] sm:top-6 sm:right-6">
+    <div className="fixed bottom-5 left-4 z-40 max-w-[260px] sm:bottom-6 sm:left-6">
       <AnimatePresence>
         {notification && (
           <motion.div
             key={notification.id}
-            initial={{ opacity: 0, y: -20, scale: 0.95 }}
+            initial={{ opacity: 0, y: 20, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: -15, scale: 0.95 }}
+            exit={{ opacity: 0, y: 15, scale: 0.95 }}
             transition={{ duration: 0.4, ease: "easeOut" }}
             className="flex items-start gap-2 rounded-lg bg-white p-3 shadow-md border border-gray-100"
           >

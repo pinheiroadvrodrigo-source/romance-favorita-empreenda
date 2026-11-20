@@ -6,13 +6,16 @@ const WhatsAppButton = () => {
       href={WHATSAPP_URL}
       target="_blank"
       rel="noopener noreferrer"
-      className="fixed bottom-6 left-6 z-50 flex items-center justify-center w-16 h-16 rounded-full bg-[#25D366] shadow-[0_6px_20px_rgba(37,211,102,0.4)] hover:shadow-[0_8px_28px_rgba(37,211,102,0.55)] hover:scale-110 transition-all duration-300 animate-whatsapp-pulse"
+      className="fixed bottom-5 right-4 sm:bottom-6 sm:right-6 z-50 flex items-center justify-center w-16 h-16 rounded-full bg-[#25D366] shadow-[0_6px_20px_rgba(37,211,102,0.4)] hover:shadow-[0_8px_28px_rgba(37,211,102,0.55)] hover:scale-110 transition-all duration-300 animate-whatsapp-pulse"
       aria-label="Falar no WhatsApp"
     >
+      {/* anel piscando */}
+      <span className="absolute inset-0 rounded-full bg-[#25D366] opacity-60 animate-ping" aria-hidden="true" />
+      <span className="absolute -top-1 -right-1 h-4 w-4 rounded-full bg-red-500 border-2 border-white animate-wa-blink" aria-hidden="true" />
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 175.216 175.552"
-        className="w-9 h-9 drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)]"
+        className="relative w-9 h-9 drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)]"
       >
         <defs>
           <linearGradient id="wa3d" x1="50%" y1="0%" x2="50%" y2="100%">
