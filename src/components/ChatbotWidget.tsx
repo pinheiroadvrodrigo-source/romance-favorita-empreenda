@@ -168,7 +168,7 @@ const ChatbotWidget = () => {
             initial={{ opacity: 0, x: 10, scale: 0.9 }}
             animate={{ opacity: 1, x: 0, scale: 1 }}
             exit={{ opacity: 0, x: 10, scale: 0.9 }}
-            className="fixed top-28 right-24 sm:right-28 z-[60] max-w-[220px] bg-white rounded-2xl shadow-xl p-4 border border-pink-100 cursor-pointer"
+            className="fixed top-28 right-[4.5rem] sm:right-24 z-[60] max-w-[220px] bg-white rounded-2xl shadow-xl p-4 border border-pink-100 cursor-pointer"
             onClick={handleOpen}
           >
             <button
@@ -185,7 +185,7 @@ const ChatbotWidget = () => {
       </AnimatePresence>
 
       {/* Toggle button (canto superior direito) */}
-      <div className="fixed top-24 right-4 sm:right-6 z-[60] flex flex-col items-center gap-1">
+      <div className="fixed top-24 right-1.5 sm:right-3 z-[60] flex flex-col items-center gap-1">
       <motion.button
         whileHover={{ scale: 1.08 }}
         whileTap={{ scale: 0.95 }}
@@ -205,15 +205,6 @@ const ChatbotWidget = () => {
           )}
         </AnimatePresence>
       </motion.button>
-      {!isOpen && (
-        <button
-          onClick={handleOpen}
-          className="flex items-center gap-1 rounded-full bg-white/95 px-2 py-0.5 shadow-sm border border-pink-100 leading-none"
-        >
-          <span className="h-1.5 w-1.5 rounded-full bg-green-500 animate-online-dot" aria-hidden="true" />
-          <span className="text-[9px] font-medium text-gray-600 whitespace-nowrap">Estamos online · posso ajudar?</span>
-        </button>
-      )}
       </div>
 
       {/* Chat window */}
@@ -224,7 +215,7 @@ const ChatbotWidget = () => {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -20, scale: 0.95 }}
             transition={{ duration: 0.25 }}
-            className="fixed top-[10.5rem] sm:top-44 right-4 sm:right-6 z-[60] w-[calc(100vw-2rem)] sm:w-[380px] max-h-[calc(100vh-12rem)] flex flex-col rounded-2xl shadow-2xl border border-pink-100 bg-white overflow-hidden"
+            className="fixed top-40 sm:top-44 right-2 sm:right-3 z-[60] w-[calc(100vw-2rem)] sm:w-[380px] max-h-[calc(100vh-12rem)] flex flex-col rounded-2xl shadow-2xl border border-pink-100 bg-white overflow-hidden"
           >
             {/* Header */}
             <div className="bg-gradient-to-r from-pink-500 to-rose-600 px-4 py-3 flex items-center gap-3">
