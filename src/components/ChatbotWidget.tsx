@@ -217,7 +217,7 @@ const ChatbotWidget = () => {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -20, scale: 0.95 }}
             transition={{ duration: 0.25 }}
-            className="fixed top-40 sm:top-44 right-2 sm:right-3 z-[60] w-[min(300px,calc(100vw-1.5rem))] sm:w-[320px] max-h-[62vh] flex flex-col rounded-2xl shadow-2xl border border-pink-100 bg-white overflow-hidden"
+            className="fixed top-40 sm:top-44 right-2 sm:right-3 z-[60] w-[min(280px,calc(100vw-1.5rem))] sm:w-[300px] max-h-[52vh] flex flex-col rounded-2xl shadow-2xl border border-pink-100 bg-white overflow-hidden"
           >
             {/* Header */}
             <div className="bg-gradient-to-r from-pink-500 to-rose-600 px-3 py-2 flex items-center gap-2">
@@ -234,7 +234,7 @@ const ChatbotWidget = () => {
             </div>
 
             {/* Messages */}
-            <div className="flex-1 overflow-y-auto p-3 space-y-2 bg-pink-50/30 min-h-[120px] max-h-[34vh]">
+            <div className="flex-1 overflow-y-auto p-3 space-y-2 bg-pink-50/30 min-h-[100px] max-h-[26vh]">
               {messages.map((msg, i) => (
                 <div key={i} className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}>
                   <div
