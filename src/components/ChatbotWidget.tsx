@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { X, Send, Heart } from "lucide-react";
 import { WHATSAPP_URL } from "@/lib/whatsapp";
 import chatbotAvatar from "@/assets/chatbot-avatar.png";
+import { CHAT_KNOWLEDGE } from "@/lib/chatKnowledge";
 
 type Message = { role: "user" | "assistant"; content: string };
 
@@ -12,6 +13,7 @@ const quickActions = [
   { label: "Quero ser empreendedora", message: "Quero ser empreendedora Romance Favorita!" },
   { label: "Como funciona?", message: "Como funciona para ser revendedora?" },
   { label: "Quanto posso ganhar?", message: "Quanto posso ganhar revendendo?" },
+  { label: "Preciso pagar algo?", message: "Preciso pagar alguma taxa ou investir para começar?" },
 ];
 
 async function streamChat({
@@ -31,7 +33,7 @@ async function streamChat({
       "Content-Type": "application/json",
       Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
     },
-    body: JSON.stringify({ messages }),
+    body: JSON.stringify({ messages: [{ role: "system", content: CHAT_KNOWLEDGE }, ...messages] }),
   });
 
   if (!resp.ok) {
@@ -215,11 +217,11 @@ const ChatbotWidget = () => {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -20, scale: 0.95 }}
             transition={{ duration: 0.25 }}
-            className="fixed top-40 sm:top-44 right-2 sm:right-3 z-[60] w-[calc(100vw-2rem)] sm:w-[380px] max-h-[calc(100vh-12rem)] flex flex-col rounded-2xl shadow-2xl border border-pink-100 bg-white overflow-hidden"
+            className="fixed top-40 sm:top-44 right-2 sm:right-3 z-[60] w-[min(300px,calc(100vw-1.5rem))] sm:w-[320px] max-h-[62vh] flex flex-col rounded-2xl shadow-2xl border border-pink-100 bg-white overflow-hidden"
           >
             {/* Header */}
-            <div className="bg-gradient-to-r from-pink-500 to-rose-600 px-4 py-3 flex items-center gap-3">
-              <div className="h-9 w-9 rounded-full bg-white/20 flex items-center justify-center">
+            <div className="bg-gradient-to-r from-pink-500 to-rose-600 px-3 py-2 flex items-center gap-2">
+              <div className="h-8 w-8 rounded-full bg-white/20 flex items-center justify-center">
                 <Heart className="h-5 w-5 text-white" fill="white" />
               </div>
               <div className="flex-1 min-w-0">
@@ -232,11 +234,11 @@ const ChatbotWidget = () => {
             </div>
 
             {/* Messages */}
-            <div className="flex-1 overflow-y-auto p-4 space-y-3 bg-pink-50/30 min-h-[200px] max-h-[45vh]">
+            <div className="flex-1 overflow-y-auto p-3 space-y-2 bg-pink-50/30 min-h-[120px] max-h-[34vh]">
               {messages.map((msg, i) => (
                 <div key={i} className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}>
                   <div
-                    className={`max-w-[85%] rounded-2xl px-4 py-2.5 text-sm leading-relaxed whitespace-pre-wrap ${
+                    className={`max-w-[88%] rounded-2xl px-3 py-2 text-[13px] leading-snug whitespace-pre-wrap ${
                       msg.role === "user"
                         ? "bg-gradient-to-br from-pink-500 to-rose-600 text-white rounded-br-md"
                         : "bg-white text-gray-700 shadow-sm border border-pink-50 rounded-bl-md"
@@ -262,12 +264,12 @@ const ChatbotWidget = () => {
 
             {/* Quick actions (show only at start) */}
             {messages.length <= 1 && (
-              <div className="px-4 pb-2 flex flex-wrap gap-2 bg-white border-t border-pink-50 pt-2">
+              <div className="px-3 pb-2 flex flex-wrap gap-1.5 bg-white border-t border-pink-50 pt-2">
                 {quickActions.map((action, i) => (
                   <button
                     key={i}
                     onClick={() => sendMessage(action.message)}
-                    className="text-xs bg-pink-50 hover:bg-pink-100 text-pink-700 rounded-full px-3 py-1.5 transition-colors border border-pink-100"
+                    className="text-[11px] bg-pink-50 hover:bg-pink-100 text-pink-700 rounded-full px-2.5 py-1 transition-colors border border-pink-100"
                   >
                     {action.label}
                   </button>
@@ -276,13 +278,13 @@ const ChatbotWidget = () => {
                   href={WHATSAPP_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-xs bg-green-50 hover:bg-green-100 text-green-700 rounded-full px-3 py-1.5 transition-colors border border-green-100"
+                  className="text-[11px] bg-green-50 hover:bg-green-100 text-green-700 rounded-full px-2.5 py-1 transition-colors border border-green-100"
                 >
                   💬 Falar no WhatsApp
                 </a>
                 <button
                   onClick={scrollToForm}
-                  className="text-xs bg-rose-500 hover:bg-rose-600 text-white rounded-full px-3 py-1.5 transition-colors font-medium"
+                  className="text-[11px] bg-rose-500 hover:bg-rose-600 text-white rounded-full px-2.5 py-1 transition-colors font-medium"
                 >
                   ✨ QUERO SER EMPREENDEDORA
                 </button>
@@ -292,20 +294,20 @@ const ChatbotWidget = () => {
             {/* Input */}
             <form
               onSubmit={(e) => { e.preventDefault(); sendMessage(input); }}
-              className="flex items-center gap-2 p-3 bg-white border-t border-pink-50"
+              className="flex items-center gap-2 p-2 bg-white border-t border-pink-50"
             >
               <input
                 ref={inputRef}
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 placeholder="Digite sua mensagem..."
-                className="flex-1 text-sm bg-pink-50/50 rounded-full px-4 py-2.5 outline-none focus:ring-2 focus:ring-pink-300 border border-pink-100 text-gray-700 placeholder:text-gray-400"
+                className="flex-1 text-[13px] bg-pink-50/50 rounded-full px-3 py-2 outline-none focus:ring-2 focus:ring-pink-300 border border-pink-100 text-gray-700 placeholder:text-gray-400"
                 disabled={isLoading}
               />
               <button
                 type="submit"
                 disabled={!input.trim() || isLoading}
-                className="h-10 w-10 rounded-full bg-gradient-to-br from-pink-500 to-rose-600 text-white flex items-center justify-center disabled:opacity-40 transition-opacity"
+                className="h-9 w-9 rounded-full bg-gradient-to-br from-pink-500 to-rose-600 text-white flex items-center justify-center disabled:opacity-40 transition-opacity"
               >
                 <Send className="h-4 w-4" />
               </button>
