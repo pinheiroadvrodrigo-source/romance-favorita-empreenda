@@ -105,7 +105,8 @@ const ChatbotWidget = () => {
   }, [messages]);
 
   useEffect(() => {
-    if (isOpen && inputRef.current) inputRef.current.focus();
+    const temMouse = window.matchMedia?.("(hover: hover) and (pointer: fine)").matches;
+    if (isOpen && temMouse && inputRef.current) inputRef.current.focus();
   }, [isOpen]);
 
   const handleOpen = () => {
@@ -301,7 +302,7 @@ const ChatbotWidget = () => {
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 placeholder="Digite sua mensagem..."
-                className="flex-1 text-[13px] bg-pink-50/50 rounded-full px-3 py-2 outline-none focus:ring-2 focus:ring-pink-300 border border-pink-100 text-gray-700 placeholder:text-gray-400"
+                className="flex-1 min-w-0 text-base sm:text-[13px] bg-pink-50/50 rounded-full px-3 py-1.5 outline-none focus:ring-2 focus:ring-pink-300 border border-pink-100 text-gray-700 placeholder:text-gray-400"
                 disabled={isLoading}
               />
               <button

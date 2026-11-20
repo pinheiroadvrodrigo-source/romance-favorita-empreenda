@@ -108,7 +108,7 @@ const RegistrationForm = () => {
                 required
                 value={form.data_nascimento}
                 onChange={(e) => setForm({ ...form, data_nascimento: e.target.value })}
-                className="w-full px-4 py-3 rounded-lg bg-background text-foreground border border-border focus:ring-2 focus:ring-primary focus:outline-none"
+                className="block w-full min-w-0 max-w-full appearance-none text-left min-h-[3rem] px-4 py-3 rounded-lg bg-background text-foreground border border-border focus:ring-2 focus:ring-primary focus:outline-none"
               />
             </div>
 
